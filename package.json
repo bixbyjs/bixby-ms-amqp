@@ -1,0 +1,50 @@
+{
+  "name": "bixby-ms-amqp",
+  "version": "0.0.0",
+  "description": "AMQP message service components for Bixby.js.",
+  "keywords": [
+    "messaging",
+    "mom",
+    "mq",
+    "pubsub",
+    "amqp",
+    "rabbitmq"
+  ],
+  "author": {
+    "name": "Jared Hanson",
+    "email": "jaredhanson@gmail.com",
+    "url": "http://jaredhanson.net/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bixbyjs/bixby-ms-amqp.git"
+  },
+  "bugs": {
+    "url": "http://github.com/bixbyjs/bixby-ms-amqp/issues"
+  },
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
+  "main": "./app",
+  "assembly": {
+    "namespace": "amqp",
+    "components": [
+      "broker"
+    ]
+  },
+  "dependencies": {
+    "crane-amqp": "0"
+  },
+  "devDependencies": {
+    "make-node": "^0.3.0",
+    "mocha": "^4.0.1",
+    "chai": "^4.1.1"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha test/*.test.js"
+  }
+}
