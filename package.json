@@ -33,8 +33,7 @@
   "assembly": {
     "namespace": "ms/net/amqp",
     "components": [
-      "protocol",
-      "broker"
+      "protocol"
     ]
   },
   "dependencies": {
