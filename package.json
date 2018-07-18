@@ -1,7 +1,7 @@
 {
   "name": "bixby-ms-amqp",
   "version": "0.0.0",
-  "description": "AMQP message service components for Bixby.js.",
+  "description": "AMQP support for Bixby.js message services.",
   "keywords": [
     "messaging",
     "mom",
@@ -33,7 +33,7 @@
   "assembly": {
     "namespace": "ms/net/amqp",
     "components": [
-      "protocol"
+      "msprotocolplugin"
     ]
   },
   "dependencies": {
@@ -41,8 +41,8 @@
   },
   "devDependencies": {
     "make-node": "^0.3.0",
-    "mocha": "^4.0.1",
-    "chai": "^4.1.1"
+    "mocha": "^5.2.0",
+    "chai": "^4.1.2"
   },
   "scripts": {
     "test": "node_modules/.bin/mocha test/*.test.js"
