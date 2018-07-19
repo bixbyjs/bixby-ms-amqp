@@ -1,5 +1,5 @@
 var uri = require('url')
-  //, pubsub = require('crane-gcp-pubsub')
+  , amqp = require('crane-amqp')
   //, loc = require('../lib/location');
 
 
@@ -8,20 +8,27 @@ exports.createConnection = function(options, readyListener) {
     options = { url: options };
   }
   
-  /*
   var url = uri.parse(options.url);
-  if (url.protocol !== 'https:' || url.hostname !== 'pubsub.googleapis.com') { return; }
+  if (url.protocol !== 'amqp:') { return; }
   
   var paths = url.pathname.split('/')
-    , projectId, conn;
-  if (paths[1] !== 'v1' || paths[2] !== 'projects') { return; }
+    , opts = {}, creds, conn;
   
-  projectId = paths[3];
-  conn = new pubsub.Connection({ projectId: projectId });
-  conn.location = loc;
+  opts.host = url.hostname;
+  opts.port = parseInt(url.port || 5672);
+  if (url.pathname) {
+    opts.vhost = paths[1];
+  }
+  if (url.auth) {
+    creds = url.auth.split(':');
+    opts.login = creds[0];
+    opts.password = creds[1];
+  }
+  
+  
+  conn = new amqp.Connection(opts);
   conn.connect(readyListener);
   return conn;
-  */
 };
 
 exports.getName = function(options) {
