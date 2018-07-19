@@ -1,6 +1,6 @@
 var uri = require('url')
   , amqp = require('crane-amqp')
-  //, loc = require('../lib/location');
+  , loc = require('../lib/location');
 
 
 exports.createConnection = function(options, readyListener) {
@@ -17,7 +17,7 @@ exports.createConnection = function(options, readyListener) {
   opts.host = url.hostname;
   opts.port = parseInt(url.port || 5672);
   if (url.pathname) {
-    opts.vhost = paths[1];
+    opts.vhost = decodeURIComponent(paths[1]);
   }
   if (url.auth) {
     creds = url.auth.split(':');
@@ -27,7 +27,9 @@ exports.createConnection = function(options, readyListener) {
   
   
   conn = new amqp.Connection(opts);
-  conn.connect(readyListener);
+  conn.location = loc;
+  // TODO: Parse exchange from URL, don't default to fanout...
+  conn.connect({ exchange: 'amq.fanout' }, readyListener);
   return conn;
 };
 
@@ -36,6 +38,8 @@ exports.getName = function(options) {
   if (typeof options == 'string') {
     options = { url: options };
   }
+  
+  return 'amqp'
   
   /*
   var url = uri.parse(options.url);
